@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>8th Class गणित Chapters</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background-color: #e6e6fa; /* lavender */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  /* Header */
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 480px;
+    height: 60px;
+    background: rgba(75, 0, 130, 0.85); /* indigo with transparency */
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+  }
+  .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .back-button svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    user-select: none;
+  }
+  /* Content wrapper */
+  .content-wrapper {
+    margin-top: 70px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+  }
+  .blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .block {
+    background-color: #dcd0ff; /* light lavender */
+    border-radius: 10px;
+    width: calc(50% - 8px);
+    padding: 15px 15px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    color: #222;
+    user-select: none;
+  }
+  .block:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-4px);
+  }
+  .block-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+    min-width: 32px;
+    text-align: center;
+  }
+  /* PDF Viewer container */
+  #pdfViewer {
+    margin-top: 20px;
+    max-width: 480px;
+    width: 100%;
+    border: 2px solid rgba(75, 0, 130, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    overflow: hidden;
+    position: relative;
+    height: 600px;
+  }
+  #pdfFrame {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+  }
+  /* Zoom Controls */
+  .zoom-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 110;
+    display: flex;
+    gap: 8px;
+  }
+  .zoom-button {
+    background: rgba(75, 0, 130, 0.85);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  }
+  .zoom-button:active {
+    background: rgba(55, 0, 90, 0.9);
+  }
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <button class="back-button" aria-label="Back" onclick="goBack()">
+      <svg viewBox="0 0 24 24">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <div class="heading">8th Class गणित</div>
+  </header>
+
+  <main class="content-wrapper">
+    <div class="blocks">
+      <div class="block" data-pdf="https://drive.google.com/file/d/19Wxfhe9IwBcQLG0g3fqkeAqRqKVRUqD_/preview"><div class="block-number">1</div>परिमये संख्याए</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1AdMLX6N6fXeNsN8uZWCd4Sup8yNYgJCC/preview"><div class="block-number">2</div>एक चर वाले रेखिक समीकरण</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1AybqxGgbqnbWDeMSf8cGoOxBfMgq0qfp/preview"><div class="block-number">3</div>चतुर्भुजो को समझना</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1AzsJ7epvicQlPseDPhhvBHcjieX2fJ9r/preview"><div class="block-number">4</div>प्रायोगीत ज्यमिति</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1B3MA3Fnw9YBOHDvLd26BwVjJxZqtZDAV/preview"><div class="block-number">5</div>आंकड़ों का प्रबंध</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1B7cA_dbNPVsWYrBtF8IRG7TKeaSkMUEB/preview"><div class="block-number">6</div>वर्ग और वर्गमूल</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1B8FUTzMhS4po_TClrDmV7z6UacO_BO8g/preview"><div class="block-number">7</div>घन और घनमुल</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1BBhqUrtcdsFI-XuvnrUA4mjs5fjMleB9/preview"><div class="block-number">8</div>राशियों की तुलना</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-2AYpWnCoLcW4N9OKcImhactJwzFV9FY/preview"><div class="block-number">9</div>बिजिए व्यंजक एवं सर्वसमिका</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-BVZzK1AjtWWeAa7QtpPrkWbgRZmcwb7/preview"><div class="block-number">10</div>ठोस आकारों का चित्रण</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-CMo3X7grVP2en7FVl6-CZQev9TlO2TA/preview"><div class="block-number">11</div>क्षेत्रमिति</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-DObQVlv6ZrwhOknZtS1au5Qm08lYzZ0/preview"><div class="block-number">12</div>घातक और घात</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-K_icpgi1-iGqCRQ8EBPcF8fPG-FsfIE/preview"><div class="block-number">13</div>सीधा और प्रतिलोम समानुपात</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-MXvHKX5hgbdo1BIwzBQTf7P9_0rZKzY/preview"><div class="block-number">14</div>गुणनखंदन</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-RXE12pJ9GGZwRBUMII8MF9X0luxwthL/preview"><div class="block-number">15</div>आलेखो से परिचय</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-Vz-BASu4xvQUUniSQmj_niW_3NEEiQI/preview"><div class="block-number">16</div>संखियाओ के साथ खेलना</div>
+    </div>
+
+    <!-- PDF Viewer iframe -->
+    <div id="pdfViewer">
+      <div class="zoom-controls">
+        <button class="zoom-button" id="zoomOut" aria-label="Zoom Out">-</button>
+        <button class="zoom-button" id="zoomIn" aria-label="Zoom In">+</button>
+      </div>
+      <iframe id="pdfFrame" src="" allowfullscreen scrolling="yes"></iframe>
+    </div>
+  </main>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  const pdfViewer = document.getElementById('pdfViewer');
+  const pdfFrame = document.getElementById('pdfFrame');
+
+  let currentScale = 1;
+  const scaleStep = 0.1;
+  const minScale = 0.5;
+  const maxScale = 3;
+
+  document.querySelectorAll('.block').forEach(block => {
+    block.addEventListener('click', () => {
+      const pdfUrl = block.getAttribute('data-pdf');
+      if(pdfUrl && pdfUrl.trim() !== "") {
+        pdfFrame.src = pdfUrl;
+        pdfViewer.style.display = 'block';
+        pdfViewer.scrollIntoView({behavior: "smooth"});
+        currentScale = 1;
+        pdfFrame.style.transform = `scale(${currentScale})`;
+      } else {
+        alert("PDF लिंक अभी उपलब्ध नहीं है।");
+      }
+    });
+  });
+
+  document.getElementById('zoomIn').addEventListener('click', () => {
+    if(currentScale < maxScale) {
+      currentScale += scaleStep;
+      pdfFrame.style.transform = `scale(${currentScale})`;
+    }
+  });
+
+  document.getElementById('zoomOut').addEventListener('click', () => {
+    if(currentScale > minScale) {
+      currentScale -= scaleStep;
+      pdfFrame.style.transform = `scale(${currentScale})`;
+    }
+  });
+</script>
+
+</body>
+</html>

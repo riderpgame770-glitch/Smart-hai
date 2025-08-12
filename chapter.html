@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chapter Selection</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; 
+    padding: 0;
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 380px;
+    background: white;
+    border-radius: 0 0 20px 20px;
+    padding: 30px 30px 40px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+  }
+
+  /* Header */
+  .header {
+    position: fixed;
+    top: 0;
+    width: 380px;
+    height: 60px;
+    background: rgba(37, 139, 39, 0.85); /* Purple translucent */
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+  }
+
+  .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .back-button svg {
+    fill: #111; /* Dark black color */
+    width: 24px;
+    height: 24px;
+  }
+
+  .heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111; /* Dark black */
+    user-select: none;
+  }
+
+  /* Add some margin-top to container so content not hidden behind fixed header */
+  .content-wrapper {
+    margin-top: 70px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .box {
+    cursor: pointer;
+    border-radius: 18px;
+    padding: 22px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Individual box colors */
+  .box-6th { background: #4A90E2; }     /* green */
+  .box-7th { background: #ff9800; }     /* blue */
+  .box-8th { background: #9c27b0; }     /* orange */
+  .box-9th { background: #4caf50; }     /* purple */
+  .box-10th { background:#3B82F6; }    /* red */
+  .box-11th { background: #607d8b; }    /* grey */
+  .box-12th { background: #795548; }    /* brown */
+
+  .box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <button class="back-button" aria-label="Back" onclick="goBack()">
+      <svg viewBox="0 0 24 24" >
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <div class="heading">Questions/Answers</div>
+  </div>
+
+  <div class="container content-wrapper">
+    <div class="grid">
+      <div class="box box-6th" data-class="6th">6th Class</div>
+      <div class="box box-7th" data-class="7th">7th Class</div>
+      <div class="box box-8th" data-class="8th">8th Class</div>
+      <div class="box box-9th" data-class="9th">9th Class</div>
+      <div class="box box-10th" data-class="10th">10th Class</div>
+      <div class="box box-11th" data-class="11th">11th Class</div>
+      <div class="box box-12th" data-class="12th">12th Class</div>
+    </div>
+  </div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  document.querySelectorAll('.box').forEach(box => {
+    box.addEventListener('click', () => {
+      const cls = box.getAttribute('data-class');
+      if(['6th','7th','8th','9th','10th'].includes(cls)) {
+        window.location.href = cls + '.html';
+      } else if (cls === '11th' || cls === '12th') {
+        alert('Coming Soon');
+      }
+    });
+  });
+</script>
+</body>
+</html>

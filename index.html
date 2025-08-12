@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study</title>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Canva+Sans:wght@700&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'League Spartan', sans-serif;
+        background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    }
+    header {
+        background: #4a148c;
+        color: white;
+        padding: 15px 20px;
+        font-family: 'Canva Sans', sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: left;
+    }
+    .scroll-text {
+        background: #fff3e0;
+        padding: 10px;
+        font-size: 16px;
+        color: #000;
+        white-space: nowrap;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .scroll-text span {
+        display: inline-block;
+        animation: scroll-left 12s linear infinite;
+    }
+    .scroll-text a {
+        color: red;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    @keyframes scroll-left {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 20px;
+    }
+    .card {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        height: 150px;
+        background: #ccc;
+    }
+    .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(1.1);
+        transition: all 0.3s ease;
+    }
+    .card:hover img {
+        transform: scale(1.05);
+        filter: brightness(1.25);
+    }
+    .card-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+    }
+</style>
+</head>
+<body>
+
+<header>Smart Study</header>
+
+<div class="scroll-text">
+    <span>📚 Welcome to Smart Study | Agar app me kuch dikkat ho to <a href="https://www.instagram.com/rider_0_4_3" target="_blank">yha click karo</a> aur Insta par btao 📩</span>
+</div>
+
+<div class="container">
+    <div class="card" onclick="window.location.href='chapter.html'">
+        <img src="file_00000000cd3c61f88e3404e7227cb271.png" alt="Questions/Answers">
+        <div class="card-text">Questions / Answers</div>
+    </div>
+    <div class="card" onclick="comingSoon()">
+        <img src="file_00000000546461f9b41e13b1ca090402.png" alt="MCQ Test">
+        <div class="card-text">MCQ Test</div>
+    </div>
+    <div class="card" onclick="comingSoon()">
+        <img src="file_000000007fe461f98ccf7cf152d3a1c2.png" alt="Previous Year">
+        <div class="card-text">Previous Year Papers</div>
+    </div>
+</div>
+
+<script>
+    function comingSoon() {
+        alert("Coming Soon...");
+    }
+</script>
+
+</body>
+</html>

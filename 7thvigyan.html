@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>7th Class विज्ञान Chapters</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background-color: #ffe6cc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Header */
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 480px;
+    height: 60px;
+    background: #ff8c00;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+  }
+
+  .back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .back-button svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+
+  .heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    user-select: none;
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    margin-top: 70px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+  }
+
+  .blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .block {
+    background-color: #fff3cc;
+    border-radius: 10px;
+    width: calc(50% - 8px);
+    padding: 15px 15px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    color: #222;
+    user-select: none;
+  }
+
+  .block:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-4px);
+  }
+
+  .block-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+    min-width: 32px;
+    text-align: center;
+  }
+
+  /* PDF Viewer container */
+  #pdfViewer {
+    margin-top: 20px;
+    max-width: 480px;
+    width: 100%;
+    border: 2px solid #ff8c00;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    overflow: hidden;
+    position: relative;
+    height: 600px;
+  }
+
+  #pdfFrame {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+  }
+
+  /* Zoom Controls */
+  .zoom-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 110;
+    display: flex;
+    gap: 8px;
+  }
+
+  .zoom-button {
+    background: #ff8c00;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  }
+
+  .zoom-button:active {
+    background: #cc7000;
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <button class="back-button" aria-label="Back" onclick="goBack()">
+      <svg viewBox="0 0 24 24">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <div class="heading">7th Class विज्ञान</div>
+  </header>
+
+  <main class="content-wrapper">
+    <div class="blocks">
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zc9Wf0s7i86gdN-Iv-A2JunSaKSrwJhq/preview"><div class="block-number">1</div>पादपो में पोषण</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1ze8HNkUEUdcXzUk7IlqJL1lBc-uXjvdG/preview"><div class="block-number">2</div>प्राण्यो में पोषण</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zgZWmK4f8rz0BwM5xxl9qPjB2ewNkniJ/preview"><div class="block-number">3</div>तंतु से वस्त्र तक</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zhm_sS-3gwwz-M4aD23eF3jOn3yHnh5q/preview"><div class="block-number">4</div>ऊष्मा</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1ziTRdjLHQi2ML0ZGJzDimQ-otAK8nL0-/preview"><div class="block-number">5</div>अमल क्षारक और लवण</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zjfdxbyufhnR5b78d8-PU9qhdkiypo34/preview"><div class="block-number">6</div>भौतिक एवं रसायनीक परिवर्तन</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zoKnEQoiOhkUWphJ2uMX7vS96oZH8YR1/preview"><div class="block-number">7</div>मौसम जलवायु तथा</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1ztf3EVcuUrcMXjHnGKnCo-a1FZBvA1cs/preview"><div class="block-number">8</div>पवन तूफान और चक्रवात</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1ztwCEEJK4g8KhiAPPvVx2SM0B3EzOje0/preview"><div class="block-number">9</div>मृदा</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zuaLONilkgpnnPkrZ4C_Q2q-MVEJB9KR/preview"><div class="block-number">10</div>जीवो में श्रवसन</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1zxvTfj_q4tKKEGp06mymVoeCKohBsdm0/preview"><div class="block-number">11</div>जंतुओं और पदपो में परिवर्तन</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/14B3irCck0vgEbrkAAurXi7AcmYbAEQ7p/preview"><div class="block-number">12</div>पादप में जनन</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-14er_k0fhhw8KYw_0q3OtmPLnDPRE_x/preview"><div class="block-number">13</div>गति एवं समय</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-A9EQnjx-3SKL6xrTrIPcIfb_5KRNJuo/preview"><div class="block-number">14</div>विधुत और इसके प्रभाव</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-BjDqgg9_NERCUqQ0RrV6qvZUs2hWu4S/preview"><div class="block-number">15</div>प्रकाश</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-EvD3bOhr1ZebQOzA2mLhpsw45JWBqK0/preview"><div class="block-number">16</div>जल हमारी जीवन रेखा</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-ftj3guZXSgKfaBKfKH2_O5FI1D35sEY/preview"><div class="block-number">17</div>वन हमारी जीवन रेखा</div>
+      <div class="block" data-pdf="https://drive.google.com/file/d/1-i1R_RvuYIUrkCI0OnRdfNxu1eQLCgNZ/preview"><div class="block-number">18</div>अपशिष्ट जल की कहानी</div>
+    </div>
+
+    <!-- PDF Viewer iframe -->
+    <div id="pdfViewer">
+      <div class="zoom-controls">
+        <button class="zoom-button" id="zoomOut" aria-label="Zoom Out">-</button>
+        <button class="zoom-button" id="zoomIn" aria-label="Zoom In">+</button>
+      </div>
+      <iframe id="pdfFrame" src="" allowfullscreen scrolling="yes"></iframe>
+    </div>
+  </main>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  const pdfViewer = document.getElementById('pdfViewer');
+  const pdfFrame = document.getElementById('pdfFrame');
+
+  let currentScale = 1;
+  const scaleStep = 0.1;
+  const minScale = 0.5;
+  const maxScale = 3;
+
+  document.querySelectorAll('.block').forEach(block => {
+    block.addEventListener('click', () => {
+      const pdfUrl = block.getAttribute('data-pdf');
+      if(pdfUrl && pdfUrl.trim() !== "") {
+        pdfFrame.src = pdfUrl;
+        pdfViewer.style.display = 'block';
+        pdfViewer.scrollIntoView({behavior: "smooth"});
+        currentScale = 1;
+        pdfFrame.style.transform = `scale(${currentScale})`;
+      } else {
+        alert("PDF लिंक अभी उपलब्ध नहीं है।");
+      }
+    });
+  });
+
+  document.getElementById('zoomIn').addEventListener('click', () => {
+    if(currentScale < maxScale) {
+      currentScale += scaleStep;
+      pdfFrame.style.transform = `scale(${currentScale})`;
+    }
+  });
+
+  document.getElementById('zoomOut').addEventListener('click', () => {
+    if(currentScale > minScale) {
+      currentScale -= scaleStep;
+      pdfFrame.style.transform = `scale(${currentScale})`;
+    }
+  });
+</script>
+
+</body>
+</html>
