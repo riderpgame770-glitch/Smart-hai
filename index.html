@@ -4,21 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Study</title>
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Canva+Sans:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 <style>
     body {
         margin: 0;
         font-family: 'League Spartan', sans-serif;
-        background: linear-gradient(135deg, #e0f7fa, #ffffff);
+        background: #f8f9fc;
     }
     header {
-        background: #4a148c;
+        background: #1e88e5;
         color: white;
-        padding: 15px 20px;
-        font-family: 'Canva Sans', sans-serif;
-        font-size: 24px;
-        font-weight: bold;
+        padding: 18px 24px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 26px;
+        font-weight: 800;
         text-align: left;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     .scroll-text {
         background: #fff3e0;
@@ -78,14 +80,110 @@
         text-align: center;
         text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
     }
+    .offline-notice {
+        position: fixed;
+        top: -80px;
+        left: 0;
+        width: 100%;
+        background: #d32f2f;
+        color: white;
+        text-align: center;
+        padding: 15px 40px 15px 15px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: top 0.4s ease;
+        z-index: 9999;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        font-family: 'Poppins', sans-serif;
+    }
+    .offline-notice.show { top: 0; }
+    .offline-close {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .welcome-modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(4px);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    }
+    .welcome-box {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        max-width: 300px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        animation: fadeIn 0.4s ease;
+    }
+    .welcome-box h2 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        color: #1e88e5;
+    }
+    .welcome-box p {
+        font-size: 16px;
+        color: #333;
+        margin: 10px 0 20px;
+    }
+    .close-btn {
+        background: #1e88e5;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    .close-btn:hover { background: #1565c0; }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .insta-btn {
+        background: #E1306C;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: background 0.3s ease;
+    }
+    .insta-btn:hover { background: #c92d61; }
 </style>
 </head>
 <body>
-
 <header>Smart Study</header>
 
+<div class="offline-notice" id="offlineNotice">
+    ⚠️ Internet connection lost! <span>Please check your network.</span>
+    <span class="offline-close" onclick="hideOffline()">×</span>
+</div>
+
+<div class="welcome-modal" id="welcomeModal">
+    <div class="welcome-box">
+        <h2>👋 Welcome to Smart Study!</h2>
+        <p>Boost your preparation 📚 <br>Stay focused, stay smart! ✨</p>
+        <a class="insta-btn" href="https://www.instagram.com/rider_0_4_3" target="_blank">Follow on Instagram</a><br><br>
+        <button class="close-btn" onclick="closeWelcome()">Let's Go 🚀</button>
+    </div>
+</div>
+
 <div class="scroll-text">
-    <span>📚 Welcome to Smart Study | Agar app me kuch dikkat ho to <a href="https://www.instagram.com/rider_0_4_3" target="_blank">yha click karo</a> aur Insta par btao 📩</span>
+    <span>📢 Important: For any issues, contact on <a href="https://www.instagram.com/rider_0_4_3" target="_blank">@rider_0_4_3</a></span>
 </div>
 
 <div class="container">
@@ -93,21 +191,54 @@
         <img src="file_00000000cd3c61f88e3404e7227cb271.png" alt="Questions/Answers">
         <div class="card-text">Questions / Answers</div>
     </div>
-    <div class="card" onclick="comingSoon()">
+    <div class="card" onclick="openPage('mcqtest.html')">
         <img src="file_00000000546461f9b41e13b1ca090402.png" alt="MCQ Test">
         <div class="card-text">MCQ Test</div>
     </div>
-    <div class="card" onclick="comingSoon()">
+    <div class="card" onclick="openPage('previous.html')">
         <img src="file_000000007fe461f98ccf7cf152d3a1c2.png" alt="Previous Year">
         <div class="card-text">Previous Year Papers</div>
     </div>
 </div>
 
 <script>
-    function comingSoon() {
-        alert("Coming Soon...");
+    function comingSoon() { alert("Coming Soon..."); }
+
+    function openPage(page) {
+        fetch(page, { method: 'HEAD' })
+            .then(res => {
+                if (res.ok) {
+                    window.location.href = page;
+                } else {
+                    comingSoon();
+                }
+            })
+            .catch(() => comingSoon());
+    }
+
+    const offlineNotice = document.getElementById('offlineNotice');
+    function updateOnlineStatus() {
+        if (navigator.onLine) {
+            offlineNotice.classList.remove('show');
+        } else {
+            offlineNotice.classList.add('show');
+        }
+    }
+    function hideOffline() { offlineNotice.classList.remove('show'); }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    window.addEventListener('load', updateOnlineStatus);
+
+    const welcomeModal = document.getElementById('welcomeModal');
+    window.addEventListener('load', () => {
+        if (!sessionStorage.getItem('welcomeShown')) {
+            welcomeModal.style.display = 'flex';
+        }
+    });
+    function closeWelcome() {
+        welcomeModal.style.display = 'none';
+        sessionStorage.setItem('welcomeShown', 'true');
     }
 </script>
-
 </body>
 </html>
