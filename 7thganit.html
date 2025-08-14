@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>7th Class गणित Chapters</title>
 <style>
-  * { box-sizing: border-box; }
+ * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
     background-color: #ffe6cc;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
+  /* Header */
   .header {
     position: fixed;
     top: 0;
@@ -22,6 +25,7 @@
     align-items: center;
     padding: 0 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    backdrop-filter: blur(6px);
     z-index: 100;
   }
   .back-button {
@@ -42,7 +46,9 @@
     font-size: 22px;
     font-weight: 700;
     color: #fff;
+    user-select: none;
   }
+  /* Content wrapper */
   .content-wrapper {
     margin-top: 70px;
     max-width: 480px;
@@ -65,8 +71,10 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
     font-weight: 600;
     color: #222;
+    user-select: none;
   }
   .block:hover {
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
@@ -79,6 +87,7 @@
     min-width: 32px;
     text-align: center;
   }
+  /* PDF Viewer container */
   #pdfViewer {
     margin-top: 20px;
     max-width: 480px;
@@ -94,7 +103,34 @@
   #pdfFrame {
     width: 100%;
     height: 100%;
+    border-radius: 10px;
     border: none;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+  }
+  /* Zoom Controls */
+  .zoom-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 110;
+    display: flex;
+    gap: 8px;
+  }
+  .zoom-button {
+    background: #ff8c00;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  }
+  .zoom-button:active {
+    background: #cc7000;
   }
 </style>
 </head>
@@ -128,23 +164,118 @@
     <div class="block" data-pdf="https://drive.google.com/file/d/1x19gOSGqgFtcgu5nv2FnVsTmnOlZQ_La/preview"><div class="block-number">15</div>ठोस आकारों का चित्रण</div>
   </div>
 
-  <div id="pdfViewer">
-    <iframe id="pdfFrame" src=""></iframe>
+ <!-- PDF Viewer -->
+<div id="pdfViewer">
+  <div class="zoom-controls">
+    <button class="zoom-button" id="zoomOut" aria-label="Zoom Out">-</button>
+    <button class="zoom-button" id="zoomIn" aria-label="Zoom In">+</button>
   </div>
-</main>
+  <div id="pdfContainer">
+    <iframe id="pdfFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<style>
+  #pdfViewer {
+    margin-top: 20px;
+    max-width: 480px;
+    width: 100%;
+    height: 600px;
+    border: 2px solid rgba(0, 70, 140, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* scrollable container */
+  #pdfContainer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #f9f9f9;
+  }
+
+  #pdfFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: width 0.2s ease, height 0.2s ease;
+  }
+
+  .zoom-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* अब left side */
+    z-index: 110;
+    display: flex;
+    gap: 8px;
+  }
+
+  .zoom-button {
+    background: #00468c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .zoom-button:active {
+    background: #003366;
+    transform: scale(0.9);
+  }
+</style>
 
 <script>
-  function goBack() {
-    window.history.back();
-  }
   const pdfViewer = document.getElementById('pdfViewer');
   const pdfFrame = document.getElementById('pdfFrame');
+
+  let currentScale = 1;
+  const scaleStep = 0.25;
+  const minScale = 0.5;
+  const maxScale = 3;
+
   document.querySelectorAll('.block').forEach(block => {
     block.addEventListener('click', () => {
-      pdfFrame.src = block.dataset.pdf;
-      pdfViewer.style.display = 'block';
-      pdfViewer.scrollIntoView({behavior: "smooth"});
+      const pdfUrl = block.getAttribute('data-pdf');
+      if(pdfUrl && pdfUrl.trim() !== "") {
+        pdfFrame.src = pdfUrl;
+        pdfViewer.style.display = 'block';
+        pdfViewer.scrollIntoView({behavior: "smooth"});
+        currentScale = 1;
+        pdfFrame.style.width = "100%";
+        pdfFrame.style.height = "100%";
+      } else {
+        alert("PDF लिंक अभी उपलब्ध नहीं है।");
+      }
     });
+  });
+
+  document.getElementById('zoomIn').addEventListener('click', () => {
+    if(currentScale < maxScale) {
+      currentScale += scaleStep;
+      pdfFrame.style.width = (100 * currentScale) + "%";
+      pdfFrame.style.height = (100 * currentScale) + "%";
+    }
+  });
+
+  document.getElementById('zoomOut').addEventListener('click', () => {
+    if(currentScale > minScale) {
+      currentScale -= scaleStep;
+      pdfFrame.style.width = (100 * currentScale) + "%";
+      pdfFrame.style.height = (100 * currentScale) + "%";
+    }
   });
 </script>
 

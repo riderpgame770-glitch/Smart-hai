@@ -124,7 +124,7 @@
   .zoom-controls {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     z-index: 110;
     display: flex;
     gap: 8px;
@@ -179,26 +179,85 @@
       <div class="block" data-pdf="https://drive.google.com/file/d/1CguSGjauzE2uH3YApnLhwrsfL8FEHW_j/preview"><div class="block-number">15</div>खाद संसाधनों ने सुधार</div>
     </div>
 
-    <!-- PDF Viewer iframe -->
-    <div id="pdfViewer">
-      <div class="zoom-controls">
-        <button class="zoom-button" id="zoomOut" aria-label="Zoom Out">-</button>
-        <button class="zoom-button" id="zoomIn" aria-label="Zoom In">+</button>
-      </div>
-      <iframe id="pdfFrame" src="" allowfullscreen scrolling="yes"></iframe>
-    </div>
-  </main>
+  <!-- PDF Viewer -->
+<div id="pdfViewer">
+  <div class="zoom-controls">
+    <button class="zoom-button" id="zoomOut" aria-label="Zoom Out">-</button>
+    <button class="zoom-button" id="zoomIn" aria-label="Zoom In">+</button>
+  </div>
+  <div id="pdfContainer">
+    <iframe id="pdfFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
 
-<script>
-  function goBack() {
-    window.history.back();
+<style>
+  #pdfViewer {
+    margin-top: 20px;
+    max-width: 480px;
+    width: 100%;
+    height: 600px;
+    border: 2px solid rgba(0, 70, 140, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    position: relative;
+    overflow: hidden;
   }
 
+  /* scrollable container */
+  #pdfContainer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #f9f9f9;
+  }
+
+  #pdfFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: width 0.2s ease, height 0.2s ease;
+  }
+
+  .zoom-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* अब left side */
+    z-index: 110;
+    display: flex;
+    gap: 8px;
+  }
+
+  .zoom-button {
+    background: #00468c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .zoom-button:active {
+    background: #003366;
+    transform: scale(0.9);
+  }
+</style>
+
+<script>
   const pdfViewer = document.getElementById('pdfViewer');
   const pdfFrame = document.getElementById('pdfFrame');
 
   let currentScale = 1;
-  const scaleStep = 0.1;
+  const scaleStep = 0.25;
   const minScale = 0.5;
   const maxScale = 3;
 
@@ -210,7 +269,8 @@
         pdfViewer.style.display = 'block';
         pdfViewer.scrollIntoView({behavior: "smooth"});
         currentScale = 1;
-        pdfFrame.style.transform = `scale(${currentScale})`;
+        pdfFrame.style.width = "100%";
+        pdfFrame.style.height = "100%";
       } else {
         alert("PDF लिंक अभी उपलब्ध नहीं है।");
       }
@@ -220,14 +280,16 @@
   document.getElementById('zoomIn').addEventListener('click', () => {
     if(currentScale < maxScale) {
       currentScale += scaleStep;
-      pdfFrame.style.transform = `scale(${currentScale})`;
+      pdfFrame.style.width = (100 * currentScale) + "%";
+      pdfFrame.style.height = (100 * currentScale) + "%";
     }
   });
 
   document.getElementById('zoomOut').addEventListener('click', () => {
     if(currentScale > minScale) {
       currentScale -= scaleStep;
-      pdfFrame.style.transform = `scale(${currentScale})`;
+      pdfFrame.style.width = (100 * currentScale) + "%";
+      pdfFrame.style.height = (100 * currentScale) + "%";
     }
   });
 </script>
