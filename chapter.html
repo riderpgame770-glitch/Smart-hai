@@ -11,7 +11,7 @@
   body {
     margin: 0; 
     padding: 0;
-    background-color: #f0f2f5;
+    background: linear-gradient(135deg,#f9f9ff,#eef7ff);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
@@ -22,8 +22,7 @@
     background: white;
     border-radius: 0 0 20px 20px;
     padding: 30px 30px 40px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    box-sizing: border-box;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
   }
 
   /* Header */
@@ -32,16 +31,15 @@
     top: 0;
     width: 380px;
     height: 60px;
-    background: rgba(37, 139, 39, 0.85); /* Purple translucent */
+    background: #2563eb; /* Blue */
     display: flex;
     align-items: center;
     padding: 0 20px;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    backdrop-filter: blur(6px);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 100;
+    color: #fff;
   }
-
   .back-button {
     background: none;
     border: none;
@@ -51,25 +49,52 @@
     display: flex;
     align-items: center;
   }
-
   .back-button svg {
-    fill: #111; /* Dark black color */
+    fill: #fff;
     width: 24px;
     height: 24px;
   }
-
   .heading {
     font-size: 22px;
     font-weight: 700;
-    color: #111; /* Dark black */
     user-select: none;
   }
 
-  /* Add some margin-top to container so content not hidden behind fixed header */
-  .content-wrapper {
-    margin-top: 70px;
+  /* Scroll Notice */
+  .scroll-text {
+    position: fixed;
+    top: 65px;
+    width: 380px;
+    background: #fff4e5;
+    padding: 8px;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    z-index: 90;
+  }
+  .scroll-text span {
+    display: inline-block;
+    animation: scroll-left 12s linear infinite;
+  }
+  .scroll-text a {
+    color: #e11d48;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  @keyframes scroll-left {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
   }
 
+  /* Add some margin-top so content not hidden */
+  .content-wrapper {
+    margin-top: 110px;
+  }
+
+  /* Grid for class boxes */
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -78,42 +103,45 @@
 
   .box {
     cursor: pointer;
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 22px 0;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: white;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     user-select: none;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
-  /* Individual box colors */
-  .box-6th { background: #4A90E2; }     /* green */
-  .box-7th { background: #ff9800; }     /* blue */
-  .box-8th { background: #9c27b0; }     /* orange */
-  .box-9th { background: #4caf50; }     /* purple */
-  .box-10th { background:#3B82F6; }    /* red */
-  .box-11th { background: #607d8b; }    /* grey */
-  .box-12th { background: #795548; }    /* brown */
+  /* Softer pastel colors */
+  .box-6th { background: #3b82f6; }
+  .box-7th { background: #f59e0b; }
+  .box-8th { background: #8b5cf6; }
+  .box-9th { background: #10b981; }
+  .box-10th { background:#ef4444; }
+  .box-11th { background: #64748b; }
+  .box-12th { background: #d97706; }
 
   .box:hover {
     transform: translateY(-6px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.25);
   }
 </style>
 </head>
 <body>
   <div class="header">
     <button class="back-button" aria-label="Back" onclick="goBack()">
-      <svg viewBox="0 0 24 24" >
+      <svg viewBox="0 0 24 24">
         <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       </svg>
     </button>
-    <div class="heading">Questions/Answers</div>
+    <div class="heading">Questions / Answers</div>
+  </div>
+
+  <div class="scroll-text">
+    <span>📢 Agar app me dikkat ho to <a href="https://www.instagram.com/rider_0_4_3" target="_blank">yha click karo</a> aur Insta par btao!</span>
   </div>
 
   <div class="container content-wrapper">
@@ -132,7 +160,6 @@
   function goBack() {
     window.history.back();
   }
-
   document.querySelectorAll('.box').forEach(box => {
     box.addEventListener('click', () => {
       const cls = box.getAttribute('data-class');
