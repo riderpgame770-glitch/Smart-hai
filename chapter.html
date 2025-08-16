@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Chapter Selection</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   body {
@@ -50,33 +51,50 @@
     height: 24px;
   }
   .heading { font-size: 22px; font-weight: 700; user-select: none; }
-  .scroll-text {
+
+  /* Modern Notice Ticker Styling */
+  .notice {
     position: fixed;
     top: 65px;
     width: 380px;
     background: #fff4e5;
-    padding: 8px;
-    font-size: 14px;
-    color: #333;
-    white-space: nowrap;
-    overflow: hidden;
     border-radius: 0 0 12px 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 8px 0;
+    overflow: hidden;
     z-index: 90;
   }
-  .scroll-text span {
-    display: inline-block;
-    animation: scroll-left 12s linear infinite;
+  .notice-inner {
+    white-space: nowrap;
   }
-  .scroll-text a {
+  .ticker {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-move 15s linear infinite;
+  }
+  .ticker .msg {
+    display: inline-block;
+    margin-right: 40px;
+    font-size: 16px;             /* updated */
+    font-weight: 700;            /* updated */
+    color: #222;                 /* updated */
+    font-family: 'Poppins', sans-serif; /* updated */
+    letter-spacing: 0.3px;       /* updated */
+  }
+  .ticker .msg a {
     color: #e11d48;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700; /* ghera link bhi */
   }
-  @keyframes scroll-left {
-    0% { transform: translateX(100%); }
+  .ticker .dot {
+    margin: 0 20px;
+    color: #999;
+  }
+  @keyframes ticker-move {
+    0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
   }
+
   .content-wrapper { margin-top: 110px; }
   .grid {
     display: grid;
@@ -169,8 +187,21 @@
     <div class="heading">Questions / Answers</div>
   </div>
 
-  <div class="scroll-text">
-    <span>📢 Agar app me dikkat ho to <a href="https://www.instagram.com/rider_0_4_3" target="_blank">yha click karo</a> aur Insta par btao!</span>
+  <!-- Modern Notice Ticker -->
+  <div class="notice">
+    <div class="notice-inner">
+      <div class="ticker" id="ticker">
+        <span class="msg">
+          🛠️ अगर ऐप में कोई दिक्कत हो तो 👉
+          <a href="https://www.instagram.com/rehanv13/" target="_blank" rel="noopener">यहाँ क्लिक करें</a>
+          — हमें बताएं! 🙌
+        </span>
+        <span class="dot">•</span>
+        <span class="msg">
+          सुझाव भी दे सकते हैं — आपकी राय हमारे लिए ज़रूरी है! 💬
+        </span>
+      </div>
+    </div>
   </div>
 
   <div class="container content-wrapper">
@@ -234,4 +265,4 @@
   window.addEventListener('load', updateOnlineStatus);
 </script>
 </body>
-</html>
+ </html>
