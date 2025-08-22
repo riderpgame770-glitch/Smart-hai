@@ -12,219 +12,56 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-7C899RCTPE');
+
+  // Disable automatic page view
+  gtag('config', 'G-7C899RCTPE', { 'send_page_view': false });
+
+  // Function to manually track page views
+  function trackPageView(path) {
+    gtag('event', 'page_view', {
+      page_title: document.title,
+      page_path: path
+    });
+  }
+
+  // Track index page load
+  trackPageView(window.location.pathname);
 </script>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    html, body {
-        width: 100%;
-        height: 100%;
-        font-family: 'League Spartan', sans-serif;
-        background: #f8f9fc;
-        transform: translateX(0);
-        transition: transform 0.5s ease-in-out; /* Slide effect */
-        overflow-x: hidden;
-    }
-    body.slide-out {
-        transform: translateX(-100%);
-    }
-    header {
-        background: #1e88e5;
-        color: white;
-        padding: 18px 24px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 26px;
-        font-weight: 800;
-        text-align: left;
-        letter-spacing: 1px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-    }
-    .scroll-text {
-        background: #fff3e0;
-        padding: 10px;
-        font-size: 16px;
-        color: #000;
-        white-space: nowrap;
-        overflow: hidden;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .scroll-text span {
-        display: inline-block;
-        animation: scroll-left 12s linear infinite;
-    }
-    .scroll-text a {
-        color: #d32f2f;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    @keyframes scroll-left {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-    }
-    .container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-        padding: 20px;
-    }
-    .card {
-        position: relative;
-        border-radius: 15px;
-        overflow: hidden;
-        cursor: pointer;
-        height: 150px;
-        background: #ccc;
-        transition: transform 0.3s ease;
-    }
-    .card:hover {
-        transform: scale(1.05);
-    }
-    .card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(1.1);
-        transition: all 0.3s ease;
-    }
-    .card:hover img {
-        filter: brightness(1.25);
-    }
-    .card-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; font-family: 'League Spartan', sans-serif; background: #f8f9fc; transform: translateX(0); transition: transform 0.5s ease-in-out; overflow-x: hidden; }
+    body.slide-out { transform: translateX(-100%); }
+    header { background: #1e88e5; color: white; padding: 18px 24px; font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 800; text-align: left; letter-spacing: 1px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+    .scroll-text { background: #fff3e0; padding: 10px; font-size: 16px; color: #000; white-space: nowrap; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .scroll-text span { display: inline-block; animation: scroll-left 12s linear infinite; }
+    .scroll-text a { color: #d32f2f; text-decoration: none; font-weight: bold; }
+    @keyframes scroll-left { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
+    .card { position: relative; border-radius: 15px; overflow: hidden; cursor: pointer; height: 150px; background: #ccc; transition: transform 0.3s ease; }
+    .card:hover { transform: scale(1.05); }
+    .card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(1.1); transition: all 0.3s ease; }
+    .card:hover img { filter: brightness(1.25); }
+    .card-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 18px; font-weight: bold; text-align: center; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
 
-    /* Offline Overlay */
-    .offline-overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        animation: fadeIn 0.3s ease;
-    }
-    .offline-box {
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        text-align: center;
-        width: 85%;
-        max-width: 320px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        animation: scaleIn 0.3s ease;
-    }
-    .offline-box .icon {
-        font-size: 40px;
-        animation: pulse 1.5s infinite;
-        margin-bottom: 10px;
-        color: #d32f2f;
-    }
-    .offline-box h3 {
-        margin: 0;
-        font-size: 18px;
-        font-family: 'Poppins', sans-serif;
-        color: #d32f2f;
-    }
-    .offline-box p {
-        font-size: 14px;
-        color: #555;
-        margin: 8px 0 15px;
-    }
-    .offline-box button {
-        background: #d32f2f;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        font-size: 14px;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-    .offline-box button:hover {
-        background: #b71c1c;
-    }
-    @keyframes pulse {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.1); opacity: 0.7; }
-        100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    @keyframes scaleIn {
-        from { transform: scale(0.9); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-    }
+    .offline-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 9999; animation: fadeIn 0.3s ease; }
+    .offline-box { background: white; padding: 25px; border-radius: 15px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: scaleIn 0.3s ease; }
+    .offline-box .icon { font-size: 40px; animation: pulse 1.5s infinite; margin-bottom: 10px; color: #d32f2f; }
+    .offline-box h3 { margin: 0; font-size: 18px; font-family: 'Poppins', sans-serif; color: #d32f2f; }
+    .offline-box p { font-size: 14px; color: #555; margin: 8px 0 15px; }
+    .offline-box button { background: #d32f2f; color: white; border: none; padding: 8px 15px; font-size: 14px; border-radius: 8px; cursor: pointer; }
+    .offline-box button:hover { background: #b71c1c; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-    /* Welcome Modal */
-    .welcome-modal {
-        display: none;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
-    }
-    .welcome-box {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        max-width: 300px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        animation: fadeIn 0.4s ease;
-    }
-    .welcome-box h2 {
-        margin: 0 0 10px;
-        font-size: 22px;
-        color: #1e88e5;
-    }
-    .welcome-box p {
-        font-size: 16px;
-        color: #333;
-        margin: 10px 0 20px;
-    }
-    .close-btn {
-        background: #1e88e5;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        font-size: 14px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
+    .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; }
+    .welcome-box { background: white; border-radius: 15px; padding: 25px; max-width: 300px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: fadeIn 0.4s ease; }
+    .welcome-box h2 { margin: 0 0 10px; font-size: 22px; color: #1e88e5; }
+    .welcome-box p { font-size: 16px; color: #333; margin: 10px 0 20px; }
+    .close-btn { background: #1e88e5; color: white; border: none; padding: 8px 15px; font-size: 14px; border-radius: 8px; cursor: pointer; transition: background 0.3s ease; }
     .close-btn:hover { background: #1565c0; }
-    .insta-btn {
-        background: #E1306C;
-        color: white;
-        text-decoration: none;
-        display: inline-block;
-        padding: 8px 15px;
-        border-radius: 8px;
-        font-weight: bold;
-        margin-top: 10px;
-        transition: background 0.3s ease;
-    }
+    .insta-btn { background: #E1306C; color: white; text-decoration: none; display: inline-block; padding: 8px 15px; border-radius: 8px; font-weight: bold; margin-top: 10px; transition: background 0.3s ease; }
     .insta-btn:hover { background: #c92d61; }
 </style>
 </head>
@@ -279,6 +116,9 @@ function navigateWithSlide(page) {
     fetch(page, { method: 'HEAD' })
         .then(res => {
             if (res.ok) {
+                // Track page view for next page manually
+                trackPageView('/' + page);
+
                 document.body.classList.add('slide-out');
                 setTimeout(() => window.location.href = page, 500);
             } else {

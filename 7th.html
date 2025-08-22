@@ -5,23 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>7th Class</title>
 <style>
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
   body {
     margin: 0;
     background-color: #ffe6cc; /* pastel peach */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-
-  /* Header */
   .header {
     position: fixed;
     top: 0;
     width: 100%;
     max-width: 480px;
     height: 60px;
-    background: rgba(255, 140, 0, 0.85); /* deep orange translucent */
+    background: rgba(255, 140, 0, 0.85);
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -29,47 +25,13 @@
     backdrop-filter: blur(6px);
     z-index: 100;
   }
-
-  .back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-  }
-
-  .back-button svg {
-    fill: #fff; /* white */
-    width: 24px;
-    height: 24px;
-  }
-
-  .heading {
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff; /* white */
-    user-select: none;
-  }
-
-  /* Content wrapper */
-  .content-wrapper {
-    margin-top: 70px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-  }
-
-  .blocks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
+  .back-button { background: none; border: none; cursor: pointer; padding: 6px; margin-right: 15px; display: flex; align-items: center; }
+  .back-button svg { fill: #fff; width: 24px; height: 24px; }
+  .heading { font-size: 22px; font-weight: 700; color: #fff; user-select: none; }
+  .content-wrapper { margin-top: 70px; max-width: 480px; margin-left: auto; margin-right: auto; padding: 20px; }
+  .blocks { display: flex; flex-wrap: wrap; gap: 16px; }
   .block {
-    background-color: #fff3cc; /* soft light yellow */
+    background-color: #fff3cc;
     border-radius: 10px;
     width: calc(50% - 8px);
     padding: 20px 15px;
@@ -80,27 +42,9 @@
     gap: 12px;
     transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
-
-  .block:hover {
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    transform: translateY(-4px);
-  }
-
-  .block-number {
-    font-size: 24px;
-    font-weight: 700;
-    color: #444;
-    min-width: 32px;
-    text-align: center;
-    user-select: none;
-  }
-
-  .block-name {
-    font-size: 18px;
-    font-weight: 600;
-    color: #222;
-    user-select: none;
-  }
+  .block:hover { box-shadow: 0 6px 15px rgba(0,0,0,0.2); transform: translateY(-4px); }
+  .block-number { font-size: 24px; font-weight: 700; color: #444; min-width: 32px; text-align: center; user-select: none; }
+  .block-name { font-size: 18px; font-weight: 600; color: #222; user-select: none; }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -114,64 +58,73 @@
 </head>
 <body>
 
-  <header class="header">
-    <button class="back-button" aria-label="Back" onclick="goBack()">
-      <svg viewBox="0 0 24 24">
-        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-      </svg>
-    </button>
-    <div class="heading">7th Class</div>
-  </header>
+<header class="header">
+  <button class="back-button" aria-label="Back" onclick="goBack()">
+    <svg viewBox="0 0 24 24">
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+    </svg>
+  </button>
+  <div class="heading">7th Class</div>
+</header>
 
-  <main class="content-wrapper">
-    <div class="blocks">
-      <div class="block" data-link="7thganit.html">
-        <div class="block-number">1</div>
-        <div class="block-name">गणित</div>
-      </div>
-      <div class="block" data-link="7thvasant.html">
-        <div class="block-number">2</div>
-        <div class="block-name">वसंत</div>
-      </div>
-      <div class="block" data-link="7thvigyan.html">
-        <div class="block-number">3</div>
-        <div class="block-name">विज्ञान</div>
-      </div>
-      <div class="block" data-link="7thsamajik.html">
-        <div class="block-number">4</div>
-        <div class="block-name">सामाजिक एवं राजनीतिक</div>
-      </div>
-      <div class="block" data-link="7thparyavaran.html">
-        <div class="block-number">5</div>
-        <div class="block-name">हमारा पर्यावरण</div>
-      </div>
-      <div class="block" data-link="7thhamaraatit.html">
-        <div class="block-number">6</div>
-        <div class="block-name">हमारा अतीत</div>
-      </div>
-      <div class="block" data-link="7thhoneycomb.html">
-        <div class="block-number">7</div>
-        <div class="block-name">honeycomb</div>
-      </div>
-      <div class="block" data-link="7thalienhand.html">
-        <div class="block-number">8</div>
-        <div class="block-name">a alien hand</div>
-      </div>
-      <div class="block" data-link="7thurdu.html">
-        <div class="block-number">9</div>
-        <div class="block-name">उर्दू</div>
-      </div>
+<main class="content-wrapper">
+  <div class="blocks">
+    <div class="block" data-link="7thganit.html" data-subject="गणित">
+      <div class="block-number">1</div>
+      <div class="block-name">गणित</div>
     </div>
-  </main>
+    <div class="block" data-link="7thvasant.html" data-subject="वसंत">
+      <div class="block-number">2</div>
+      <div class="block-name">वसंत</div>
+    </div>
+    <div class="block" data-link="7thvigyan.html" data-subject="विज्ञान">
+      <div class="block-number">3</div>
+      <div class="block-name">विज्ञान</div>
+    </div>
+    <div class="block" data-link="7thsamajik.html" data-subject="सामाजिक एवं राजनीतिक">
+      <div class="block-number">4</div>
+      <div class="block-name">सामाजिक एवं राजनीतिक</div>
+    </div>
+    <div class="block" data-link="7thparyavaran.html" data-subject="हमारा पर्यावरण">
+      <div class="block-number">5</div>
+      <div class="block-name">हमारा पर्यावरण</div>
+    </div>
+    <div class="block" data-link="7thhamaraatit.html" data-subject="हमारा अतीत">
+      <div class="block-number">6</div>
+      <div class="block-name">हमारा अतीत</div>
+    </div>
+    <div class="block" data-link="7thhoneycomb.html" data-subject="honeycomb">
+      <div class="block-number">7</div>
+      <div class="block-name">honeycomb</div>
+    </div>
+    <div class="block" data-link="7thalienhand.html" data-subject="a alien hand">
+      <div class="block-number">8</div>
+      <div class="block-name">a alien hand</div>
+    </div>
+    <div class="block" data-link="7thurdu.html" data-subject="उर्दू">
+      <div class="block-number">9</div>
+      <div class="block-name">उर्दू</div>
+    </div>
+  </div>
+</main>
 
 <script>
   function goBack() {
+    gtag('event', 'back_click', { 'event_category': '7th Class', 'event_label': 'Back Button' });
     window.history.back();
   }
 
   document.querySelectorAll('.block').forEach(block => {
     block.addEventListener('click', () => {
       const link = block.getAttribute('data-link');
+      const subject = block.getAttribute('data-subject');
+      
+      // GA event tracking
+      gtag('event', 'subject_select', {
+        'event_category': '7th Class',
+        'event_label': subject
+      });
+
       if(link) {
         window.location.href = link;
       }

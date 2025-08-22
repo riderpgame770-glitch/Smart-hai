@@ -251,6 +251,13 @@
   document.querySelectorAll('.box').forEach(box => {
     box.addEventListener('click', () => {
       const cls = box.getAttribute('data-class');
+
+      // GA Event Track
+      gtag('event', 'class_select', {
+        'event_category': 'Chapter Selection',
+        'event_label': cls
+      });
+
       const file = cls + '.html';
       fetch(file, { method: 'HEAD' })
         .then(res => {
