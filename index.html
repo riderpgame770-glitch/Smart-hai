@@ -5,11 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Study</title>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7C899RCTPE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7C899RCTPE');
+</script>
+
 <style>
-    body {
+    * {
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html, body {
+        width: 100%;
+        height: 100%;
         font-family: 'League Spartan', sans-serif;
         background: #f8f9fc;
+        transform: translateX(0);
+        transition: transform 0.5s ease-in-out; /* Slide effect */
+        overflow-x: hidden;
+    }
+    body.slide-out {
+        transform: translateX(-100%);
     }
     header {
         background: #1e88e5;
@@ -57,6 +79,10 @@
         cursor: pointer;
         height: 150px;
         background: #ccc;
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: scale(1.05);
     }
     .card img {
         width: 100%;
@@ -66,7 +92,6 @@
         transition: all 0.3s ease;
     }
     .card:hover img {
-        transform: scale(1.05);
         filter: brightness(1.25);
     }
     .card-text {
@@ -81,7 +106,7 @@
         text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
     }
 
-    /* Modern Offline Overlay */
+    /* Offline Overlay */
     .offline-overlay {
         position: fixed;
         top: 0; left: 0;
@@ -147,6 +172,7 @@
         to { transform: scale(1); opacity: 1; }
     }
 
+    /* Welcome Modal */
     .welcome-modal {
         display: none;
         position: fixed;
@@ -231,15 +257,15 @@
 </div>
 
 <div class="container">
-    <div class="card" onclick="window.location.href='chapter.html'">
+    <div class="card" onclick="navigateWithSlide('chapter.html')">
         <img src="file_00000000cd3c61f88e3404e7227cb271.webp" alt="Questions/Answers">
         <div class="card-text">Questions / Answers</div>
     </div>
-    <div class="card" onclick="openPage('mcqtest.html')">
+    <div class="card" onclick="navigateWithSlide('mcqtest.html')">
         <img src="file_00000000546461f9b41e13b1ca090402.webp" alt="MCQ Test">
         <div class="card-text">MCQ Test</div>
     </div>
-    <div class="card" onclick="openPage('previous.html')">
+    <div class="card" onclick="navigateWithSlide('previous.html')">
         <img src="file_000000007fe461f98ccf7cf152d3a1c2.webp" alt="Previous Year">
         <div class="card-text">Previous Year Papers</div>
     </div>
@@ -248,11 +274,13 @@
 <script>
 function comingSoon() { alert("Coming Soon..."); }
 
-function openPage(page) {
+// Page slide navigation
+function navigateWithSlide(page) {
     fetch(page, { method: 'HEAD' })
         .then(res => {
             if (res.ok) {
-                window.location.href = page;
+                document.body.classList.add('slide-out');
+                setTimeout(() => window.location.href = page, 500);
             } else {
                 comingSoon();
             }
@@ -262,7 +290,6 @@ function openPage(page) {
 
 // Offline Handling
 const offlineOverlay = document.getElementById('offlineOverlay');
-
 function updateOnlineStatus() {
     if (navigator.onLine) {
         offlineOverlay.style.display = 'none';
@@ -270,7 +297,6 @@ function updateOnlineStatus() {
         offlineOverlay.style.display = 'flex';
     }
 }
-
 function retryConnection() {
     if (navigator.onLine) {
         location.reload();
@@ -278,7 +304,6 @@ function retryConnection() {
         alert("Still no connection!");
     }
 }
-
 window.addEventListener('online', updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
 window.addEventListener('load', updateOnlineStatus);
