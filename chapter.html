@@ -182,6 +182,16 @@
   }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .coming-soon-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; }
+  .coming-soon-box { background: white; border-radius: 15px; padding: 25px; max-width: 300px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: fadeIn 0.4s ease; }
+  .coming-soon-box .icon { font-size: 40px; margin-bottom: 10px; color: #ff9800; animation: pulse 1.5s infinite; }
+  .coming-soon-box h2 { margin: 0 0 10px; font-size: 22px; color: #ff9800; }
+  .coming-soon-box p { font-size: 16px; color: #333; margin: 10px 0 20px; }
+  .coming-soon-close { background: #ff9800; color: white; border: none; padding: 8px 15px; font-size: 14px; border-radius: 8px; cursor: pointer; transition: background 0.3s ease; }
+  .coming-soon-close:hover { background: #f57c00; }
+
+  footer { text-align: center; padding: 10px; font-size: 14px; color: #555; font-family: 'Poppins', sans-serif; font-weight: 600; position: absolute; bottom: 0; width: 380px; background: white; border-radius: 0 0 20px 20px; z-index: 80; }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -231,6 +241,8 @@
     </div>
   </div>
 
+  <footer>Made by  Rehan 🚀✨</footer>
+
   <div class="offline-overlay" id="offlineOverlay">
     <div class="offline-box">
       <div class="icon">📡</div>
@@ -240,7 +252,25 @@
     </div>
   </div>
 
+  <!-- Coming Soon Modal -->
+  <div class="coming-soon-modal" id="comingSoonModal">
+    <div class="coming-soon-box">
+        <div class="icon">🚧</div>
+        <h2>Coming Soon! ✨</h2>
+        <p>This feature is under development. Stay tuned for exciting updates!</p>
+        <button class="coming-soon-close" onclick="closeComingSoon()">Okay</button>
+    </div>
+  </div>
+
 <script>
+  function comingSoon() {
+    document.getElementById('comingSoonModal').style.display = 'flex';
+  }
+
+  function closeComingSoon() {
+    document.getElementById('comingSoonModal').style.display = 'none';
+  }
+
   function animateBack() {
     document.querySelector('.header').classList.add('slide-out');
     document.querySelector('.notice').classList.add('slide-out');
@@ -267,10 +297,10 @@
             document.querySelector('.container').classList.add('slide-out');
             setTimeout(() => window.location.href = file, 500);
           } else {
-            alert('Coming Soon');
+            comingSoon();
           }
         })
-        .catch(() => alert('Coming Soon'));
+        .catch(() => comingSoon());
     });
   });
 

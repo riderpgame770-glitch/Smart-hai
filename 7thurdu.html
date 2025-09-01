@@ -1,94 +1,100 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Coming Soon - Feature Not Available</title>
+<title>Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-  body, html {
-    margin: 0; padding: 0;
-    height: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    font-family: 'Montserrat', sans-serif;
-    color: #fff;
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f8f9fc;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px;
+    height: 100vh;
+    overflow: hidden; /* No scrolling */
   }
-  .container {
-    background: rgba(255 255 255 / 0.1);
-    padding: 40px 30px;
-    border-radius: 20px;
-    max-width: 400px;
+  .coming-soon-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    user-select: none;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
   }
-  .emoji {
-    font-size: 72px;
-    margin-bottom: 20px;
-    animation: pulse 2s infinite;
+  .coming-soon-box {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 300px;
+    width: 85%;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.4s ease;
+  }
+  .coming-soon-box .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #ff9800;
+    animation: pulse 1.5s infinite;
+  }
+  .coming-soon-box h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    color: #ff9800;
+  }
+  .coming-soon-box p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0 20px;
+  }
+  .back-btn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .back-btn:hover {
+    background: #f57c00;
   }
   @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
   }
-  h1 {
-    font-weight: 700;
-    font-size: 28px;
-    margin: 0 0 10px;
-    letter-spacing: 1px;
-  }
-  p {
-    font-size: 18px;
-    margin: 0 0 30px;
-    color: #dcdcdc;
-    line-height: 1.4;
-  }
-  button.back-btn {
-    background-color: #fff;
-    color: #764ba2;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255,255,255,0.4);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  button.back-btn:hover {
-    background-color: #6f42c1;
-    color: #fff;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 </style>
 </head>
 <body>
-
-<div class="container" role="alert" aria-live="polite">
-  <div class="emoji" aria-hidden="true">🚧⏳</div>
-  <h1>क्षमा करें! यह फीचर अभी उपलब्ध नहीं है।</h1>
-  <p>हम इस पर काम कर रहे हैं। जल्द ही वापस आएं!</p>
-  <button class="back-btn" onclick="goBack()" aria-label="Previous page">← पिछला पेज</button>
-</div>
+  <div class="coming-soon-modal">
+    <div class="coming-soon-box">
+      <div class="icon">🚧</div>
+      <h2>Coming Soon! ✨</h2>
+      <p>This feature is under development. Stay tuned for exciting updates!</p>
+      <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+  </div>
 
 <script>
   function goBack() {
-    if(window.history.length > 1) {
-      window.history.back();
-    } else {
-      // अगर history न हो तो homepage या कोई fallback लिंक पर जाएं
-      window.location.href = '/'; // अपनी साइट का मुख्य पेज यहां डालो
-    }
+    window.history.back();
   }
 </script>
-
 </body>
 </html>

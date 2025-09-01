@@ -63,6 +63,16 @@
     .close-btn:hover { background: #1565c0; }
     .insta-btn { background: #E1306C; color: white; text-decoration: none; display: inline-block; padding: 8px 15px; border-radius: 8px; font-weight: bold; margin-top: 10px; transition: background 0.3s ease; }
     .insta-btn:hover { background: #c92d61; }
+
+    .coming-soon-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 10000; justify-content: center; align-items: center; }
+    .coming-soon-box { background: white; border-radius: 15px; padding: 25px; max-width: 300px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: fadeIn 0.4s ease; }
+    .coming-soon-box .icon { font-size: 40px; margin-bottom: 10px; color: #ff9800; animation: pulse 1.5s infinite; }
+    .coming-soon-box h2 { margin: 0 0 10px; font-size: 22px; color: #ff9800; }
+    .coming-soon-box p { font-size: 16px; color: #333; margin: 10px 0 20px; }
+    .coming-soon-close { background: #ff9800; color: white; border: none; padding: 8px 15px; font-size: 14px; border-radius: 8px; cursor: pointer; transition: background 0.3s ease; }
+    .coming-soon-close:hover { background: #f57c00; }
+
+    footer { text-align: center; padding: 10px; font-size: 14px; color: #555; font-family: 'Poppins', sans-serif; font-weight: 600; position: absolute; bottom: 0; width: 100%; background: #f8f9fc; }
 </style>
 </head>
 <body>
@@ -88,6 +98,16 @@
     </div>
 </div>
 
+<!-- Coming Soon Modal -->
+<div class="coming-soon-modal" id="comingSoonModal">
+    <div class="coming-soon-box">
+        <div class="icon">🚧</div>
+        <h2>Coming Soon! ✨</h2>
+        <p>This feature is under development. Stay tuned for exciting updates!</p>
+        <button class="coming-soon-close" onclick="closeComingSoon()">Okay</button>
+    </div>
+</div>
+
 <!-- Scrolling Notice -->
 <div class="scroll-text">
     <span>🚨 Facing any issues? <a href="https://www.instagram.com/rehanv13/" target="_blank">Click here and let us know!</a> 🚀</span>
@@ -103,13 +123,21 @@
         <div class="card-text">MCQ Test</div>
     </div>
     <div class="card" onclick="navigateWithSlide('previous.html')">
-        <img src="file_000000007fe461f98ccf7cf152d3a1c2.webp" alt="Previous Year">
+        <img src="file_000000007fe461f98ccf7cf152d3a1c2.webp" alt="Previous Year Papers">
         <div class="card-text">Previous Year Papers</div>
     </div>
 </div>
 
+<footer>Made by  Rehan 🚀✨</footer>
+
 <script>
-function comingSoon() { alert("Coming Soon..."); }
+function comingSoon() {
+    document.getElementById('comingSoonModal').style.display = 'flex';
+}
+
+function closeComingSoon() {
+    document.getElementById('comingSoonModal').style.display = 'none';
+}
 
 // Page slide navigation
 function navigateWithSlide(page) {
